@@ -22,6 +22,22 @@ function App() {
     {img: saladImg,  name: "Salad", count: 0, id: 4,  price: 10},
   ]);
 
+  const renderBurger = () => {
+    const arrayOfIngredClass: string[] = []
+    for (let i = 0; i < ingredients.length; i++) {
+      if (ingredients[i].count > 0) {
+
+        for (let g = 0; g < ingredients[i].count; g++){
+          arrayOfIngredClass.push(ingredients[i].name);
+        }
+      }
+    }
+
+    return arrayOfIngredClass.map((item, i) => (
+      <div key={i} className={item}></div>
+    ))
+  }
+
   const countClick = (id: number) => {
     console.log(id);
     setIngredients(ingredients.map(item => {
@@ -31,7 +47,6 @@ function App() {
           count: item.count + 1
         }
       }
-            //синтаксис map
       return  item;
     }));
   };
@@ -60,6 +75,18 @@ function App() {
             <button onClick={()=> deleteIngred(item.id)} >x</button>
            </div>
         ))}
+      </div>
+
+      <div>
+        <div className="Burger">
+          <div className="BreadTop">
+            <div className="Seeds1"></div>
+            <div className="Seeds2"></div>
+          </div>
+          {renderBurger()}
+
+          <div className="BreadBottom"></div>
+        </div>
       </div>
     </>
   )
