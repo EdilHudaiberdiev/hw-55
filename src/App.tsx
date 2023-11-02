@@ -16,11 +16,15 @@ interface ingredientsInterface {
 function App() {
 
   const [ingredients, setIngredients] = useState<ingredientsInterface[]>([
-    {img: cheeseImg,  name: "Cheese", count: 0, id: 1, price: 10},
-    {img: meatImg,  name: "Bacon", count: 0, id: 2, price: 10},
-    {img: pattyImg,  name: "Meat", count: 0, id: 3,  price: 10},
+    {img: cheeseImg,  name: "Cheese", count: 0, id: 1, price: 50},
+    {img: meatImg,  name: "Bacon", count: 0, id: 2, price: 60},
+    {img: pattyImg,  name: "Meat", count: 0, id: 3,  price: 80},
     {img: saladImg,  name: "Salad", count: 0, id: 4,  price: 10},
   ]);
+
+  const [totalPrice, setTotalPrice] = useState<number>(30)
+
+
 
   const renderBurger = () => {
     const arrayOfIngredClass: string[] = []
@@ -42,6 +46,7 @@ function App() {
     console.log(id);
     setIngredients(ingredients.map(item => {
       if (item.id === id ) {
+        setTotalPrice(prevState => prevState + item.price)
         return {
           ...item,
           count: item.count + 1
@@ -49,11 +54,13 @@ function App() {
       }
       return  item;
     }));
+
   };
 
   const deleteIngred = (id: number) => {
     setIngredients(ingredients.map(item => {
       if (item.id === id && item.count > 0) {
+        setTotalPrice(prevState => prevState - item.price)
         return {
           ...item,
           count: item.count - 1
@@ -66,30 +73,38 @@ function App() {
 
   return (
     <>
-      <div className="ingredientsList">
-        {ingredients.map(item => (
-          <div className="ingredientsElement"  key={item.id}>
-            <p> {item.name} </p>
-            <img  onClick={()=> countClick(item.id)} src={item.img} className="ingredientsImg" alt={item.name}/>
-            <p>Count {item.count}</p>
-            <button onClick={()=> deleteIngred(item.id)} >x</button>
-           </div>
-        ))}
-      </div>
-
-      <div>
-        <div className="Burger">
-          <div className="BreadTop">
-            <div className="Seeds1"></div>
-            <div className="Seeds2"></div>
-          </div>
-          {renderBurger()}
-
-          <div className="BreadBottom"></div>
+      <div className="container">
+        <div className="ingredientsList">
+          {ingredients.map(item => (
+            <div className="ingredientsElement"  key={item.id}>
+              <p> {item.name} </p>
+              <img  onClick={()=> countClick(item.id)} src={item.img} className="ingredientsImg" alt={item.name}/>
+              <p>Count {item.count}</p>
+              <button onClick={()=> deleteIngred(item.id)} >x</button>
+            </div>
+          ))}
         </div>
+
+        <div>
+          <div className="Burger">
+            <div className="BreadTop">
+              <div className="Seeds1"></div>
+              <div className="Seeds2"></div>
+            </div>
+            {renderBurger()}
+
+            <div className="BreadBottom"></div>
+          </div>
+        </div>
+
       </div>
+
+      <div className="totalPrice">Price {totalPrice}</div>
+
     </>
   )
 }
 
 export default App
+
+

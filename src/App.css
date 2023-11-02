@@ -2,10 +2,18 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+.container {
   display: flex;
   align-items: center;
   border: 2px solid black;
   border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.totalPrice {
+  text-align: center;
 }
 
 .Burger {
