@@ -21,15 +21,20 @@
 }
 
 .ingredientsList{
-  margin-right: 30px;
+  margin-right: 50px;
 }
 
 .ingredientsElement{
   border: 2px solid black;
   border-radius: 20px;
   padding: 20px 10px ;
-  width: 220px;
+  width: 250px;
   display: flex;
+  margin: 10px 0;
+}
+
+.ingredientsElement > p{
+  margin-right: 10px;
 }
 
 .logo {

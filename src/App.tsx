@@ -4,6 +4,8 @@ import meatImg from './assets/meat.png'
 import pattyImg from './assets/patty.png'
 import saladImg from './assets/salad.png'
 import './App.css'
+import Ingredients from './components/Ingredients';
+import Price from './components/Price';
 
 interface ingredientsInterface {
   name: string;
@@ -76,12 +78,7 @@ function App() {
       <div className="container">
         <div className="ingredientsList">
           {ingredients.map(item => (
-            <div className="ingredientsElement"  key={item.id}>
-              <p> {item.name} </p>
-              <img  onClick={()=> countClick(item.id)} src={item.img} className="ingredientsImg" alt={item.name}/>
-              <p>Count {item.count}</p>
-              <button onClick={()=> deleteIngred(item.id)} >x</button>
-            </div>
+            <Ingredients key={item.id} item={item} deleteIngred={deleteIngred} countClick={countClick}/>
           ))}
         </div>
 
@@ -98,9 +95,7 @@ function App() {
         </div>
 
       </div>
-
-      <div className="totalPrice">Price {totalPrice}</div>
-
+      <Price number={totalPrice}/>
     </>
   )
 }
